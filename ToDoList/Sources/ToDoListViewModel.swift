@@ -4,44 +4,67 @@ final class ToDoListViewModel: ObservableObject {
     // MARK: - Private properties
 
     private let repository: ToDoListRepositoryType
+    private var allItems: [ToDoItem] = []  // Liste complète
+
+    private var selectedFilterIndex = 0  // Indice du filtre sélectionné
 
     // MARK: - Init
 
     init(repository: ToDoListRepositoryType) {
         self.repository = repository
-        self.toDoItems = repository.loadToDoItems()
+        self.allItems = repository.loadToDoItems()  // Charge les items initiaux
+        self.toDoItems = allItems  // Affiche la liste complète au début
     }
 
     // MARK: - Outputs
 
-    /// Publisher for the list of to-do items.
+    /// Publisher pour la liste des tâches à afficher, filtrée en fonction de l'indice.
     @Published var toDoItems: [ToDoItem] = [] {
         didSet {
-            repository.saveToDoItems(toDoItems)
+            repository.saveToDoItems(toDoItems)  // Sauvegarde après modification
         }
     }
 
     // MARK: - Inputs
 
-    // Add a new to-do item with priority and category
+    /// Ajouter un nouvel élément à la liste.
     func add(item: ToDoItem) {
-        toDoItems.append(item)
+        allItems.append(item)
+        applyFilter(at: selectedFilterIndex)  // Applique le filtre après l'ajout
     }
 
-    /// Toggles the completion status of a to-do item.
+    /// Modifie le statut de complétion d'un élément.
     func toggleTodoItemCompletion(_ item: ToDoItem) {
-        if let index = toDoItems.firstIndex(where: { $0.id == item.id }) {
-            toDoItems[index].isDone.toggle()
+        if let index = allItems.firstIndex(where: { $0.id == item.id }) {
+            allItems[index].isDone.toggle()  // Change le statut "done"
+            applyFilter(at: selectedFilterIndex)  // Applique le filtre après modification
         }
     }
 
-    /// Removes a to-do item from the list.
+    /// Supprimer un élément de la liste.
     func removeTodoItem(_ item: ToDoItem) {
-        toDoItems.removeAll { $0.id == item.id }
+        allItems.removeAll { $0.id == item.id }  // Retire l'élément de la liste complète
+        applyFilter(at: selectedFilterIndex)  // Applique le filtre après suppression
     }
 
-    /// Apply the filter to update the list.
+    /// Applique un filtre en fonction de l'indice donné (0 = tous, 1 = non faits, 2 = terminés).
     func applyFilter(at index: Int) {
-        // TODO: - Implement the logic for filtering
+        selectedFilterIndex = index  // Mémorise le filtre sélectionné
+        
+        switch index {
+        case 0:
+            // Affiche tous les éléments
+            toDoItems = allItems
+        case 1:
+            // Affiche uniquement les éléments non terminés
+            toDoItems = allItems.filter { !$0.isDone }
+        case 2:
+            // Affiche uniquement les éléments terminés
+            toDoItems = allItems.filter { $0.isDone }
+        default:
+            // Par défaut, affiche tous les éléments
+            toDoItems = allItems
+        }
     }
 }
+
