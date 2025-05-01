@@ -17,6 +17,7 @@
 		2F90C7F12AC358B4005D888A /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F90C7F02AC358B4005D888A /* ToDoItem.swift */; };
 		2F90C7F32AC358DB005D888A /* ToDoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F90C7F22AC358DB005D888A /* ToDoListViewModel.swift */; };
 		2F938E8F2AC580DF00E828F4 /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 2F938E8E2AC580DF00E828F4 /* Readme.md */; };
+		ED7B3B0C2DC3A3190068A36F /* FilterChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7B3B0B2DC3A3110068A36F /* FilterChoice.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		2F90C7F02AC358B4005D888A /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
 		2F90C7F22AC358DB005D888A /* ToDoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewModel.swift; sourceTree = "<group>"; };
 		2F938E8E2AC580DF00E828F4 /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
+		ED7B3B0B2DC3A3110068A36F /* FilterChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterChoice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 			children = (
 				2F90C7E02AC357C6005D888A /* ToDoListApp.swift */,
 				2F90C7E22AC357C6005D888A /* ToDoListView.swift */,
+				ED7B3B0B2DC3A3110068A36F /* FilterChoice.swift */,
 				2F90C7F22AC358DB005D888A /* ToDoListViewModel.swift */,
 				2F90C7EE2AC357FC005D888A /* ToDoListRepository.swift */,
 				2F90C7F02AC358B4005D888A /* ToDoItem.swift */,
@@ -252,6 +255,7 @@
 				2F90C7E12AC357C6005D888A /* ToDoListApp.swift in Sources */,
 				2F90C7F12AC358B4005D888A /* ToDoItem.swift in Sources */,
 				2F90C7EF2AC357FC005D888A /* ToDoListRepository.swift in Sources */,
+				ED7B3B0C2DC3A3190068A36F /* FilterChoice.swift in Sources */,
 				2F90C7F32AC358DB005D888A /* ToDoListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

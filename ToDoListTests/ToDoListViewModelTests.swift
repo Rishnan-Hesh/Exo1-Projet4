@@ -34,8 +34,8 @@ final class ToDoListViewModelTests: XCTestCase {
         viewModel.add(item: item)
         
         // Then
-        XCTAssertEqual(viewModel.toDoItems.count, 1)
-        XCTAssertTrue(viewModel.toDoItems[0].title == "Test Task")
+        XCTAssertEqual(viewModel.filteredItems.count, 1)
+        XCTAssertTrue(viewModel.filteredItems[0].title == "Test Task")
     }
     
     func testToggleTodoItemCompletion() {
@@ -47,19 +47,19 @@ final class ToDoListViewModelTests: XCTestCase {
         viewModel.toggleTodoItemCompletion(item)
         
         // Then
-        XCTAssertTrue(viewModel.toDoItems[0].isDone)
+        XCTAssertTrue(viewModel.filteredItems[0].isDone)
     }
     
     func testRemoveTodoItem() {
         // Given
         let item = ToDoItem(title: "Test Task")
-        viewModel.toDoItems.append(item)
-        
+        viewModel.filteredItems.append(item)
+
         // When
         viewModel.removeTodoItem(item)
         
         // Then
-        XCTAssertTrue(viewModel.toDoItems.isEmpty)
+        XCTAssertTrue(viewModel.filteredItems.isEmpty)
     }
     
     func testFilteredToDoItems() {
@@ -70,18 +70,24 @@ final class ToDoListViewModelTests: XCTestCase {
         viewModel.add(item: item2)
         
         // When
-        viewModel.applyFilter(at: 0)
+        viewModel.selectedFilter = .all
+        viewModel.applyFilter()
+
         // Then
-        XCTAssertEqual(viewModel.toDoItems.count, 2)
-        
+        XCTAssertEqual(viewModel.filteredItems.count, 2)
+
         // When
-        viewModel.applyFilter(at: 1)
+        viewModel.selectedFilter = .completed
+        viewModel.applyFilter()
+
         // Then
-        XCTAssertEqual(viewModel.toDoItems.count, 1)
-        
+        XCTAssertEqual(viewModel.filteredItems.count, 1)
+
         // When
-        viewModel.applyFilter(at: 2)
+        viewModel.selectedFilter = .notCompleted
+        viewModel.applyFilter()
+        
         // Then
-        XCTAssertEqual(viewModel.toDoItems.count, 1)
+        XCTAssertEqual(viewModel.filteredItems.count, 1)
     }
 }
